@@ -50,10 +50,10 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav">
-							<li class="nav-item active"><a class="nav-link fs xl" href="index.html">หน้าแรก</a></li>
-							<li class="nav-item"><a class="nav-link fs xl" href="about.html">แอปพลิเคชัน</a></li>
-							<li class="nav-item"><a class="nav-link fs xl" href="portfolio.html">เกี่ยวกับเรา</a></li>
-							<li class="nav-item"><a class="nav-link fs xl" href="portfolio.html">ติดต่อเรา</a></li>
+							<li class="nav-item active"><a class="nav-link fs xl" onclick="smoothScroll(document.getElementById('home'))" href="#" >หน้าแรก</a></li>
+							<li class="nav-item"><a class="nav-link fs xl" onclick="smoothScroll(document.getElementById('application'))" href="#">แอปพลิเคชัน</a></li>
+							<li class="nav-item"><a class="nav-link fs xl" onclick="smoothScroll(document.getElementById('about'))" href="#" >เกี่ยวกับเรา</a></li>
+							<li class="nav-item"><a class="nav-link fs xl" onclick="smoothScroll(document.getElementById('tell'))" href="#" >ติดต่อเรา</a></li>
 							<!-- <li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Pages</a>
@@ -80,7 +80,7 @@
 	<!--================ End Header Area =================-->
 
 	<!--================ Start Home Banner Area =================-->
-	<section class="home_banner_area">
+	<section class="home_banner_area" id="home">
 		<div class="banner_inner">
 			<div class="container">
 				<div class="row align-items-center justify-content-between">
@@ -142,7 +142,7 @@
 	<!--================ End Statistics Area =================-->
 
 	<!--================ Start About Us Area =================-->
-	<section class="about_area section_gap">
+	<section class="about_area section_gap" id="about">
 		<div class="container">
 			<div class="row justify-content-start align-items-center">
 				<div class="col-lg-5">
@@ -171,7 +171,7 @@
 	</section>
 	<!--================ End About Us Area =================-->
 	<!--================ Start Blog Area =================-->
-	<section class="blog-area section-gap">
+	<section class="blog-area section-gap" id="application">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -320,7 +320,7 @@
 
 
 	<!--================Footer Area =================-->
-	<footer class="footer_area">
+	<footer class="footer_area" id="tell" >
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-12">
@@ -383,6 +383,30 @@
 	<script src="js/jquery.ajaxchimp.min.js"></script>
 	<script src="js/mail-script.js"></script> --> 
 	<script src="js/theme.js"></script>
+	<script>
+		window.smoothScroll = function(target) {
+    var scrollContainer = target;
+    do { //find scroll container
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+
+    var targetY = 0;
+    do { //find the top of target relatively to the container
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop;
+    } while (target = target.offsetParent);
+
+    scroll = function(c, a, b, i) {
+        i++; if (i > 30) return;
+        c.scrollTop = a + (b - a) / 30 * i;
+        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+    }
+    // start scrolling
+    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+}
+	</script>
 </body>
 
 </html>
